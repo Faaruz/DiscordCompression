@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.discordcompression.controllers.StartViewController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <StackPane onDragDropped="#handleDropped" onDragOver="#handleDragOver" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <MediaView fx:id="mediaView" fitHeight="350.0" fitWidth="600.0">
+               <StackPane.margin>
+                  <Insets bottom="100.0" right="358.0" />
+               </StackPane.margin>
+            </MediaView>
+            <Label prefHeight="28.0" prefWidth="167.0" text="Drag File inside or Choose File">
+               <StackPane.margin>
+                  <Insets bottom="480.0" right="350.0" />
+               </StackPane.margin>
+            </Label>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Slider fx:id="progressBar">
+                     <VBox.margin>
+                        <Insets left="16.0" right="450.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#chooseFile" text="Choose File">
+                           <HBox.margin>
+                              <Insets left="17.0" right="5.0" top="7.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#play" text="Play">
+                           <HBox.margin>
+                              <Insets left="17.0" right="5.0" top="7.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#pause" text="Pause">
+                           <HBox.margin>
+                              <Insets left="17.0" right="5.0" top="7.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Slider fx:id="volumeSlider">
+                           <HBox.margin>
+                              <Insets left="17.0" right="5.0" top="7.0" />
+                           </HBox.margin>
+                        </Slider>
+                        <Button mnemonicParsing="false" onAction="#compressFile" text="8mb-inator">
+                           <HBox.margin>
+                              <Insets left="450.0" top="7.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>
