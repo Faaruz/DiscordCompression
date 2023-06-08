@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.discordcompression.controllers.SettingViewController">
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" text="Toggle Dark/Light Mode" wrapText="true">
+               <HBox.margin>
+                  <Insets left="100.0" right="40.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" text="Check For Updates" wrapText="true">
+               <HBox.margin>
+                  <Insets left="100.0" right="40.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" text="Change Output Folder" wrapText="true">
+               <HBox.margin>
+                  <Insets left="100.0" right="40.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" text="Help" wrapText="true">
+               <HBox.margin>
+                  <Insets left="100.0" right="40.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </center>
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="menuSettings" mnemonicParsing="false" onMouseClicked="#MenuChange" text="Settings" />
+            <Button fx:id="menuVideoCompress" mnemonicParsing="false" onMouseClicked="#MenuChange" text="Video Compression" />
+            <Button fx:id="menuAudioEdit" mnemonicParsing="false" onMouseClicked="#MenuChange" text="Audio Editor" />
+            <Button fx:id="menuDeepFry" mnemonicParsing="false" onMouseClicked="#MenuChange" text="DEEP FRY MY VIDEO" />
+         </children>
+      </HBox>
+   </top>
+</BorderPane>

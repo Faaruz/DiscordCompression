@@ -1,19 +1,23 @@
 package com.discordcompression;
 
+import com.discordcompression.controllers.StartViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class CompressionApplication extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CompressionApplication.class.getResource("start-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/setting-view.fxml")));
+        stage.setTitle("Discord Compression Tool");
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
         stage.show();
     }
 

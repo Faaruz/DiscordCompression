@@ -10,6 +10,11 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
 import javafx.scene.control.Slider;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -18,12 +23,14 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class StartViewController {
@@ -32,7 +39,6 @@ public class StartViewController {
     public String path;
     public File file;
     public MediaPlayer mediaPlayer;
-
     @FXML
     private MediaView mediaView;
 
@@ -41,6 +47,48 @@ public class StartViewController {
 
     @FXML
     private Slider volumeSlider;
+
+    @FXML
+    private Menu MenuVideoComp;
+
+    @FXML
+    private Button menuAudioEdit;
+
+    @FXML
+    private Button menuDeepFry;
+
+    @FXML
+    private Button menuSettings;
+
+    @FXML
+    private Button menuVideoCompress;
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
+
+    @FXML
+    void MenuChange(MouseEvent event) throws IOException {
+        if (event.getSource() == menuSettings) {
+            stage = (Stage) menuSettings.getScene().getWindow();
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/setting-view.fxml")));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } else if (event.getSource() == menuVideoCompress) {
+            stage = (Stage) menuSettings.getScene().getWindow();
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/start-view.fxml")));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } else if (event.getSource() == menuAudioEdit) {
+            System.out.println("Audio Edit");
+        } else if (event.getSource() == menuDeepFry) {
+            System.out.println("Deep Fry");
+        }
+    }
+
 
     @FXML
     void handleDragOver(DragEvent event) {
@@ -142,7 +190,7 @@ public class StartViewController {
             outputFile = new File(inputFile.getParentFile(), "output/" + fileName);
             count++;
         }
-// create the output folder if it doesn't exist
+    // create the output folder if it doesn't exist
         outputFile.getParentFile().mkdirs();
         File finalOutputFile = outputFile;
         Thread thread = new Thread(() -> {
@@ -154,4 +202,29 @@ public class StartViewController {
         });
         thread.start();
     }
+
+    @FXML
+    void DeepFry(ActionEvent event){
+        File inputFile = file;
+        String fileName = "output.mp4";
+        File outputFile = new File(inputFile.getParentFile(), "output/" + fileName);
+        int count = 1;
+        while (outputFile.exists()) {
+            fileName = "output" + count + ".mp4";
+            outputFile = new File(inputFile.getParentFile(), "output/" + fileName);
+            count++;
+        }
+        // create the output folder if it doesn't exist
+        outputFile.getParentFile().mkdirs();
+        File finalOutputFile = outputFile;
+        Thread thread = new Thread(() -> {
+            try {
+                videoCompressionTask.deepFryVideo(inputFile.getAbsolutePath(), finalOutputFile.getAbsolutePath());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+    }
+
 }
