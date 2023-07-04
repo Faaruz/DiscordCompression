@@ -11,9 +11,12 @@ public class VideoCompressionTask {
     public void compressVideo(String inputFilePath, String outputFilePath) throws IOException, InterruptedException {
         long fileSize = Files.size(Paths.get(inputFilePath));
         long fileSizeInMB = fileSize / (1024 * 1024);
-        long fileSizeLimit = 150;
+        long fileSizeLimit = 160;
 
-        if (!inputFilePath.endsWith(".mp4") || fileSizeInMB > fileSizeLimit || fileSizeInMB < 6){
+        String osName = System.getProperty("os.name");
+        boolean isWindows = osName.startsWith("Windows");
+
+        if ((!inputFilePath.endsWith(".mp4") || fileSizeInMB > fileSizeLimit || fileSizeInMB < 6 || !isWindows)){
             throw new IOException("Input file size is either bigger than " + fileSizeLimit + "MB or invalid File Extension Current size: " + fileSizeInMB + " " +  fileSizeLimit);
         }
 

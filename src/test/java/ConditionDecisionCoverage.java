@@ -33,7 +33,7 @@ public class ConditionDecisionCoverage {
         } catch (java.io.IOException e) {
             invalidExtensionDetected = true;
         }
-        assertTrue(invalidExtensionDetected, "Input file size exceeds limit.");
+        assertFalse(invalidExtensionDetected, "Input file size exceeds limit.");
 
         // .mov file + kleiner dan 150MB
         inputFilePath = "src/testvideos/test1.mov";

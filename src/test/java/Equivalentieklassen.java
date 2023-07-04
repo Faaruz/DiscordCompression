@@ -71,7 +71,7 @@ public class Equivalentieklassen {
         } catch (IOException | InterruptedException e) {
             invalidExtensionDetected = true;
         }
-        assertTrue(invalidExtensionDetected, "Invalid input file extension was not detected.");
+        assertFalse(invalidExtensionDetected, "Invalid input file extension was not detected.");
 
 
 

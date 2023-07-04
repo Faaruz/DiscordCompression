@@ -17,7 +17,7 @@ public class ConditionCoverage {
      */
     @Test
     public void testCompressVideoConditionCoverage() throws Exception {
-        // Test invalid input file + kleiner dan 150MB
+        // Test invalid input file + groter dan 150MB + linux
         String inputFilePath = "src/testvideos/test1.mov";
         String outputFilePath = "src/testvideos/test2.mp4";
         boolean invalidExtensionDetected = false;
@@ -28,13 +28,14 @@ public class ConditionCoverage {
         }
         assertTrue(invalidExtensionDetected, "Invalid input file extension was not detected.");
 
-        // Test valid input file + kleiner dan 150MB
-        inputFilePath = "src/testvideos/large.mp4";
+        // Test valid input file + kleiner dan 150MB + windows
+        inputFilePath = "src/testvideos/test1.mp4";
+        invalidExtensionDetected = false;
         try {
             compressor.compressVideo(inputFilePath, outputFilePath);
         } catch (java.io.IOException e) {
             invalidExtensionDetected = true;
         }
-        assertTrue(invalidExtensionDetected, "Invalid input file extension was not detected.");
+        assertFalse(invalidExtensionDetected, "Invalid input file extension was not detected.");
     }
 }

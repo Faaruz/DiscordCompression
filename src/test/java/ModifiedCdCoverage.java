@@ -20,28 +20,52 @@ public class ModifiedCdCoverage {
             Boolean invalidExtensionDetected = false;
             Boolean fileSizeExceedsLimit = false;
 
-            // A = true, B = false
-            String inputFilePath = "src/testvideos/test1.mp4";
+            // A = False, B = True C = True
+            String inputFilePath = "src/testvideos/test1.mov";
             String outputFilePath = "src/testvideos/test4.mp4";
             try {
                 compressor.compressVideo(inputFilePath, outputFilePath);
-                fileSizeExceedsLimit = true;
             } catch (java.io.IOException e) {
                 invalidExtensionDetected = true;
+            }
+            assertTrue(invalidExtensionDetected, "Invalid input file extension was not detected.");
+            assertFalse(fileSizeExceedsLimit, "Input file size exceeds 150MB limit.");
+
+            // A = True, B = False C = True
+            inputFilePath = "src/testvideos/test.mp4";
+            outputFilePath = "src/testvideos/test4.mp4";
+            try {
+                compressor.compressVideo(inputFilePath, outputFilePath);
+                invalidExtensionDetected = false;
+            } catch (java.io.IOException e) {
+                fileSizeExceedsLimit = true;
+                invalidExtensionDetected = true;
+            }
+            assertFalse(invalidExtensionDetected, "Invalid input file extension was not detected.");
+            assertFalse(fileSizeExceedsLimit, "Input file size exceeds 150MB limit.");
+
+            // A = True, B = True C = False
+            inputFilePath = "src/testvideos/test.mov";
+            outputFilePath = "src/testvideos/test4.mp4";
+            try {
+                compressor.compressVideo(inputFilePath, outputFilePath);
+            } catch (java.io.IOException e) {
+                fileSizeExceedsLimit = true;
+                invalidExtensionDetected = false;
             }
             assertFalse(invalidExtensionDetected, "Invalid input file extension was not detected.");
             assertTrue(fileSizeExceedsLimit, "Input file size exceeds 150MB limit.");
 
-            // A = false, B = true
+            // A = True, B = True C = True
             inputFilePath = "src/testvideos/test.mov";
             outputFilePath = "src/testvideos/test4.mp4";
             try {
                 compressor.compressVideo(inputFilePath, outputFilePath);
             } catch (java.io.IOException e) {
                 fileSizeExceedsLimit = false;
-                invalidExtensionDetected = true;
+                invalidExtensionDetected = false;
             }
-            assertTrue(invalidExtensionDetected, "Invalid input file extension was not detected.");
+            assertFalse(invalidExtensionDetected, "Invalid input file extension was not detected.");
             assertFalse(fileSizeExceedsLimit, "Input file size exceeds 150MB limit.");
         }
     }
